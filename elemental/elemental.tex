@@ -1,0 +1,43 @@
+%!TEX root = ../thesis.tex
+
+\section{ROS 2}
+ROS 2（Robot Operating System versition 2）は, オープンソースのロボットソフトウェアフレームワークであり,
+ロボットアプリケーションの開発や実行をサポートするミドルウェアである.
+異なるバージョンが存在しているが, 本研究ではROS 2 foxyを主に使用している.
+
+\subsection{RViz2}
+RViz2（ROS VIsualization2）はROS 2で提供される三次元ビジュアライゼーションツールであり, 
+数値で表されるロボットの座標や各センサのデータを視覚的に表すことができる.
+
+\section{GNSS}
+GNSS（Global Navigation Satelite System）は, 
+人工衛星を利用して地上の現在位置を計測するためのシステムであり, 
+アメリカのGPS, ロシアのGLONASS, ヨーロッパのGalileo, 日本のQGSSなどを総称した衛生測位システムを指す.
+
+\subsection{UTM座標系}
+UTM（Universal Transverse Mercator）座標系とは, 全世界を経度6度ごとのゾーンに分けて東回りに番号を付けて規格化したものである.
+世界的にも大・中縮尺の図法として採用され, 日本では国土地理院の地形図や地勢図で採用されている.
+
+\begin{figure}[H]
+  \centering
+ \includegraphics[keepaspectratio, scale=0.7]
+      {images/UTMCoordinateSystem.png}
+ \caption{UTM Coordinate System（source）}
+ \label{fig:purepursuit}
+\end{figure}
+
+% AIFormulaの会場となるAIモビリティパークは茨城県常総市にあるため, 54帯のUTM座標系を使用する.
+
+\subsection{ECEF座標系}
+ECEF（Earth-Centered, Earth-Fixed）座標系とは, 地理的・直交的な座標系であり, 地球の自転と同期して常時回転している座標系である.
+
+\subsection{測地座標系}
+測地座標系とは, 地球上の位置を緯度, 経度, および回転楕円体からの高さで表す座標系である.
+
+\section{IMU}
+IMU（Inertial Measurement Unit）は, 
+3次元の慣性運動を検出する装置である. 
+加速度センサーにより並進運動を検出し, 
+ジャイロセンサーにより回転運動を検出することができる.
+
+\newpage
