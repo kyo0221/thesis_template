@@ -47,7 +47,20 @@ PI制御の問題点として, 周囲の環境が変化したり制御対象に�
 
 
 \subsection{スプライン補間}
+本研究で取得する目標経路は, ウェイポイントを繋ぐライン上で定めている.
+定めたウェイポイントが疎らである場合に, ロボットに無理のない追従を行わせるためには目標経路の曲線が滑らかである必要がある.
+そこで, 3次スプライン補間を行うことで, 用意されたウェイポイント上を繋ぐラインに対して曲線を担保することが可能となる.
 
+3次スプライン補間とは, 複数のサンプル点が与えられた時に, そのサンプル点の間を3次の多項式で近似し, 滑らかに保管する手法である.
+Fig.3.2にその様子を示す.
+
+\begin{figure}[H]
+     \centering
+    \includegraphics[keepaspectratio, scale=0.5]
+         {images/splinepath.png}
+    \caption{Spline path}
+    \label{fig:purepursuit}
+\end{figure}
 
 
 \newpage
