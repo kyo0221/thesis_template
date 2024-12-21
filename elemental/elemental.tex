@@ -1,12 +1,12 @@
 %!TEX root = ../thesis.tex
 
 \section{ROS 2}
-ROS 2（Robot Operating System versition 2）は, オープンソースのロボットソフトウェアフレームワークであり,
+ROS 2（Robot Operating System versition 2）\cite{ros2}は, オープンソースのロボットソフトウェアフレームワークであり,
 ロボットアプリケーションの開発や実行をサポートするミドルウェアである.
 異なるバージョンが存在しているが, 本研究ではROS 2 foxyを主に使用している.
 
 \subsection{RViz2}
-RViz2（ROS VIsualization2）はROS 2で提供される三次元ビジュアライゼーションツールであり, 
+RViz2（ROS VIsualization 2）\cite{rviz}はROS 2で提供される三次元ビジュアライゼーションツールであり, 
 数値で表されるロボットの座標や各センサのデータを視覚的に表すことができる.
 
 \begin{figure}[H]
@@ -26,14 +26,14 @@ GNSS（Global Navigation Satelite System）は,
 測定された距離にはさまざまな誤差要因が含まれる.
 
 \subsection{UTM座標系}
-UTM（Universal Transverse Mercator）座標系とは, 全世界を経度6度ごとのゾーンに分けて東回りに番号を付けて規格化したものである.
+UTM（Universal Transverse Mercator）座標系\cite{utm}とは, 全世界を経度6度ごとのゾーンに分けて東回りに番号を付けて規格化したものである.
 世界的にも大・中縮尺の図法として採用され, 日本では国土地理院の地形図や地勢図で採用されている.
 
 \begin{figure}[H]
   \centering
  \includegraphics[keepaspectratio, scale=0.7]
       {images/UTMCoordinateSystem.png}
- \caption{UTM Coordinate System（source）}
+ \caption{UTM Coordinate System（source : [7]}
  \label{fig:UTM}
 \end{figure}
 

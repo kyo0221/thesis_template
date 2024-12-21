@@ -8,6 +8,7 @@ AIFormulaで実際に使われる会場であるAIモビリティパークで自
 それぞれ起動時に実行される地磁気の補正と一定時間5m/s以上で走行させた時に実行されるGNSSの補正があるが,
 本実験ではGNSS+IMU（VectorNav VN-200）に対してGNSSの補正を実行した状態で行うこととする.
 有効性を検証するために, いくつかの評価指標を設ける.
+評価指標をTable.6.1に示す.
 
 \begin{table}[H]
   \centering
@@ -43,11 +44,33 @@ Fig.6.1にAIモビリティパークの図を示す.
 このロボットは差動二輪+従動輪で構成された三輪モデルとなっている.
 貸与された状態のロボットから従動輪をモータで駆動する形式に変更を加えている.
 また, 安全面を考慮してロボットにアンテナを取り付けて遠隔で非常停止ボタンが押せるようにしている.
-PCの仕様をTable.6.1に示す.
+PCの仕様をTable.6.2に示す.
 経路追従にはGNSS+IMUセンサ（VectorNav VN-200）を使用する.
 ソフトウェアはROS 2を使用して構築している.
 
-fig（センサに着目したロボットの画像）
+\begin{figure}[H]
+     \centering
+    \includegraphics[keepaspectratio, scale=0.6]
+         {images/robotdescription.png}
+    \caption{Robot description}
+    \label{fig:robot}
+\end{figure}
+
+\begin{table}[H]
+     \centering
+     \caption{experimental device}
+     \begin{tabular}{cclll}
+     \cline{1-2}
+     computer             & Jetson AGX Orin &  &  &  \\
+     OS                   & Jetpack 5.1.2   &  &  &  \\
+     ROS 2                & foxy            &  &  &  \\
+                          &                 &  &  &  \\
+                          &                 &  &  &  \\
+                          &                 &  &  &  \\
+     \multicolumn{1}{l}{} &                 &  &  &  \\
+     \multicolumn{1}{l}{} &                 &  &  & 
+     \end{tabular}
+\end{table}
 
 本研究で開発した経路追従ソフトウェアは事前に用意した目標経路に沿って追従する動作を行う.
 本実験で使用する目標経路は実験日と同日にAIモビリティパークを手動走行させて取得したGNSSデータを基準に作成している.
@@ -80,7 +103,7 @@ AIモビリティパークで自律走行させることで経路追従の有効
 \section{実験結果と考察}
 
 \subsection{実験1}
-走行時のパラメータをTable.6.1に示す.
+走行時のパラメータをTable.6.3に示す.
 \begin{table}[H]
      \centering
      \caption{experiment1 parameters}
@@ -100,7 +123,7 @@ AIモビリティパークで自律走行させることで経路追従の有効
 目標経路に対して大きなズレも無く追従することができることを確認できた.
 実験時の走行経路と目標経路の軌跡をFig.6.5に示す.
 また, 目標経路との誤差の遷移をFig.6.6に示す.
-最後に評価項目の結果をTable.6.2に示す.
+最後に評価項目の結果をTable.6.4に示す.
 
 \begin{figure}[H]
      \centering
@@ -123,7 +146,7 @@ AIモビリティパークで自律走行させることで経路追従の有効
      \caption{evaluation item}
      \begin{tabular}{cclll}
      \multicolumn{1}{c|}{並進速度{[}m/s{]}}         & 3.0  &  &  &  \\
-     \multicolumn{1}{c|}{走行時間{[}s{]}}           & 140?   &  &  &  \\
+     \multicolumn{1}{c|}{走行時間{[}s{]}}           & 153   &  &  &  \\
      \multicolumn{1}{c|}{走行経路と目標経路の累積誤差{[}m{]}} & 2244.0 &  &  &  \\
      \multicolumn{1}{c|}{走行経路と目標経路の最大誤差{[}m{]}} & 2.8 &  &  &  \\
                                                 &      &  &  &  \\
@@ -134,7 +157,7 @@ AIモビリティパークで自律走行させることで経路追従の有効
 \end{table}
 
 \subsection{実験2}
-走行時のパラメータをTable.6.3に示す.
+走行時のパラメータをTable.6.5に示す.
 
 \begin{table}[H]
      \centering
@@ -153,9 +176,9 @@ AIモビリティパークで自律走行させることで経路追従の有効
 
 実験の結果, 並進速度6m/sでコースを一周することができた.
 コース東側の道で蛇行する動きを見せたものの, 経路から外れることなく周回することができた.
-実験時の走行経路と目標経路の軌跡をFig.6.5に示す.
-また, 目標経路との誤差の遷移をFig.6.6に示す.
-最後に評価項目の結果をTable.6.4に示す.
+実験時の走行経路と目標経路の軌跡をFig.6.7に示す.
+また, 目標経路との誤差の遷移をFig.6.8に示す.
+最後に評価項目の結果をTable.6.6に示す.
 
 \begin{figure}[H]
      \centering
@@ -178,7 +201,7 @@ AIモビリティパークで自律走行させることで経路追従の有効
      \caption{evaluation item}
      \begin{tabular}{cclll}
      \multicolumn{1}{c|}{並進速度{[}m/s{]}}         & 6.0  &  &  &  \\
-     \multicolumn{1}{c|}{走行時間{[}s{]}}           & 43   &  &  &  \\
+     \multicolumn{1}{c|}{走行時間{[}s{]}}           & 51   &  &  &  \\
      \multicolumn{1}{c|}{走行経路と目標経路の累積誤差{[}m{]}} & 1130.0 &  &  &  \\
      \multicolumn{1}{c|}{走行経路と目標経路の最大誤差{[}m{]}} & 2.11 &  &  &  \\
                                                 &      &  &  &  \\
