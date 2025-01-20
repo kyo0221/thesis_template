@@ -11,21 +11,14 @@
 %
 
 %
-本論文では屋外自律高速モビリティを対象とした経路追従ソフトウェアを開発する.
-また, 開発した経路追従ソフトウェアを実環境で検証を行った結果について述べる.
-屋外自律高速モビリティを使用してスピードと知能を競うリアルワールドレースを行うAI-Formulaという技術チャレンジがある.
-% AI-Formulaは次世代モビリティに必要な多くの技術を身につける機会を提供し, 次世代モビリティのシステムを開発するエンジニアを育てることを一つの目的としている.
-%
-AI-Formulaでは, ベースとなるハードウェアが貸与される.
-技術チャレンジという性質上, ルールが設けられていてハードウェアは支給されたモータやタイヤを使用するなどの制約がある.
-そのため, 開発要素としてはソフトウェア開発が主となる.
-%
-AI-Formulaではベースソフトウェアが用意されているが, これらはモビリティを制御するための基盤となるソフトウェア構成となっている.
-提供されるベースソフトウェアではモビリティを制御するための最低限の機能に留まっているため, 経路追従などのコースを周回するソフトウェアは各チームで開発することが必要となる.
-そのため, 本論文ではAI-Formulaで使用されるモビリティを対象とした経路追従ソフトウェアを開発する.
-また, 作成した経路追従ソフトウェアを実環境で検証する.
-結果として, 用意した目標経路に対して追従する様子を確認した.
-
+本論文では屋外自律高速モビリティを対象とした経路追従ソフトウェアの開発および実環境での検証結果について述べる.
+屋外自律高速モビリティを使用してスピードと知能を競うリアルワールドレースを行う技術チャレンジにAI-Formulaがある.
+AI-Formulaは, 次世代モビリティに必要な多くの技術を習得する機会を提供し, 次世代モビリティのシステムを開発するエンジニアの育成を一つの目的としている.
+AI-Formulaにおいて, モビリティを制御するためのベースソフトウェアが提供されているが, コースを周回するための経路追従ソフトウェアは各自が開発する必要がある.
+本研究では, AI-Formulaで使用される屋外自律高速モビリティを対象とした経路追従ソフトウェアを開発した.
+開発した経路追従ソフトウェアは, GNSSで得たデータに基づくPure pursuitアルゴリズムを用いた経路追従手法を採用した.
+また, 作成した経路追従ソフトウェアを実環境で検証した.
+結果として, 目標経路に対して追従する様子を確認した.
 % 概要と同様にAI-Formulaについての説明が多すぎるような気がする
 %
 %
@@ -58,21 +51,18 @@ AI-Formulaではベースソフトウェアが用意されているが, これ�
 \end{center}
 \vspace{1.0zh}
 %
-In this paper, I develop a path-following software for outdoor autonomous high-speed mobility.
-I also present the results of the verification of the developed path-following software in a real environment.
-There is a technical challenge called AI-Formula, which is a real-world race for speed and intelligence using outdoor autonomous high-speed mobility vehicles.
-One of the objectives of AI-Formula is to provide opportunities to acquire many skills necessary for next-generation mobility and to foster engineers who will develop next-generation mobility systems.
-%
-In AI-Formula, the base hardware is loaned to the participants.
-Due to the nature of the technical challenge, there are some restrictions such as the use of supplied motors and tires for the hardware.
-Therefore, the main development element is software development.
-%
-AI-Formula provides a base software, which is the software structure that serves as the basis for controlling mobility.
-Since the provided base software has only the minimum functions to control mobility, each team needs to develop its own software to follow a path around the course.
-Therefore, in this paper, we develop a path-following software for mobility used in AI-Formula.
-In addition, the developed path-following package is verified in a real environment.
-As a result, we confirmed that the software follows the prepared target paths.
+  In this paper, I develop a path-following software for outdoor autonomous high-speed mobility.
+AI-Formula is a technical challenge, which is a real-world race using outdoor autonomous high-speed mobility vehicles for speed and intelligence.
+AI-Formula provides an opportunity to learn many technologies necessary for next-generation mobility, and one of the objectives of AI-Formula is to train engineers who will develop next-generation mobility systems.
+% 
+In AI-Formula, the base software for controlling mobility is provided, but the path-following software for going around the course needs to be developed by each user.
+In this study, I developed a path-following software for outdoor autonomous high-speed mobility used in AI-Formula.
+% 
+The developed path-following software employs a path-following method using the Pure pursuit algorithm based on the data obtained from GNSS.
+The developed software was verified in a real environment.
+% 
+As a result, I confirmed that the mobility followed the target path.
 %
 \vspace{2.0zh}
 
-keywords: AI-Formula, path-following, Pure pursuit
+keywords: AI-Formula, Path-following, Pure pursuit

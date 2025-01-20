@@ -1,20 +1,57 @@
 %!TEX root = ../thesis.tex
 
-\section{ROS 2}
-ROS 2（Robot Operating System versition 2）\cite{ros2}は, オープンソースのロボットソフトウェアフレームワークであり,
-ロボットアプリケーションの開発や実行をサポートするミドルウェアである.
-異なるバージョンが存在しているが, 本研究ではROS 2 foxyを主に使用している.
+% \section{ROS 2}
+% ROS 2（Robot Operating System versition 2）\cite{ros2}は, オープンソースのロボットソフトウェアフレームワークであり,
+% ロボットアプリケーションの開発や実行をサポートするミドルウェアである.
+% 異なるバージョンが存在しているが, 本研究ではROS 2 foxyを主に使用している.
 
-\subsection{RViz2}
-RViz2（ROS VIsualization 2）\cite{rviz}はROS 2で提供される三次元ビジュアライゼーションツールであり, 
-数値で表されるロボットの座標や各センサのデータを視覚的に表すことができる.
+\section{経路追従}
+経路追従（Path following）とは, 経路計画（Path planning）で引いた経路に対してモビリティが経路を追従できるようにモビリティを制御することである.
+基本的にはモビリティのモデルと制御アルゴリズムを利用することで, 最終的にステアリング角度や並進速度を計算することが目的となる.
+
+\subsection{PurePursuit}
+PurePursuitアルゴリズムは, 経路追従アルゴリズムの中で最も基礎的だが, 非常に広く使われているアルゴリズムである.
+
+PurePursuitは目標経路上に対して一定距離先の点を目標点（Look Ahead）とし, その点に到達するようなステアリング制御を行う.
+目標点に対してモビリティが前進することで, 目標点が更新されるため結果的に目標経路に追従することとなる.
+Fig.2.1にPure pursuitの仕組みを表す図を示す.
 
 \begin{figure}[H]
-  \centering
- \includegraphics[keepaspectratio, scale=0.4]
-     {images/rviz.png}
- \caption{RViz2 view}
- \label{fig:purepursuit}
+     \centering
+    \includegraphics[keepaspectratio, scale=0.5]
+         {images/purepursuit.png}
+    \caption{Pure pursuit}
+    \label{fig:purepursuit}
+\end{figure}
+% \begin{figure}[H]
+%   \centering
+%  \includegraphics[keepaspectratio, scale=0.5]
+%       {images/PurePursuit.png}
+%  \caption{PurePursuit Algorithm}
+%  \label{fig:purepursuit}
+% \end{figure}
+
+% \section{経路生成}
+% 経路追従を行うためには, 追従するための目標経路を設定する必要がある.
+
+% 自律移動ロボットの開発において目標経路の探索を経路計画と呼び, 重要な問題の一つとされている.
+% 本研究では, 目標経路は予め取得した測地座標系の経緯度で用意されたウェイポイントを結ぶ線形経路として設定している.
+
+\section{3次スプライン補間}
+3次スプライン補間とは, 複数のサンプル点が与えられた時に, そのサンプル点の間を3次の多項式で近似し, 滑らかに補間する手法である.
+% 一般的には, 設定したウェイポイントが疎らである場合に, 離散的で不連続なウェイポイントから, 滑らかで連続的な経路を生成するために3次スプライン補間が使用される.
+
+一般に, 設定したウェイポイントが疎である場合や, 離散的なウェイポイントから連続的な経路を作成する場合に適用される.
+% 本研究で取得する目標経路は, ウェイポイントを結ぶ経路として設定している.
+% そこで, 3次スプライン補間を行うことで, 用意されたウェイポイント上を繋ぐラインに対して曲線を担保することが可能となる.
+Fig.2.2にその様子を示す.
+
+\begin{figure}[H]
+     \centering
+    \includegraphics[keepaspectratio, scale=0.5]
+         {images/splinepath.png}
+    \caption{Spline path}
+    \label{fig:purepursuit}
 \end{figure}
 
 \section{GNSS}
@@ -33,7 +70,7 @@ UTM（Universal Transverse Mercator）座標系\cite{utm}とは, 全世界を経
   \centering
  \includegraphics[keepaspectratio, scale=0.7]
       {images/UTMCoordinateSystem.png}
- \caption{UTM Coordinate System（source : [7]}
+ \caption{UTM Coordinate System（source : [5]）}
  \label{fig:UTM}
 \end{figure}
 
@@ -51,38 +88,38 @@ ECEF（Earth-Centered, Earth-Fixed）座標系とは, 地理的・直交的な�
 
 \begin{figure}[H]
   \centering
- \includegraphics[keepaspectratio, scale=0.4]
+ \includegraphics[keepaspectratio, scale=0.6]
       {images/multipath.png}
  \caption{Multipath}
  \label{fig:multipath}
 \end{figure}
 
-\section{IMU}
-IMU（Inertial Measurement Unit）は, 
-3次元の慣性運動を検出する装置である. 
-加速度センサーにより並進運動を検出し, 
-ジャイロセンサーにより回転運動を検出することができる.
+% \section{IMU}
+% IMU（Inertial Measurement Unit）は, 
+% 3次元の慣性運動を検出する装置である. 
+% 加速度センサーにより並進運動を検出し, 
+% ジャイロセンサーにより回転運動を検出することができる.
 
-\section{PID制御}
-PID制御（Proportional-Integral-Differential Controller）は, 制御工学におけるフィードバック制御の一種である.
-出力値と目標値との偏差, その積分, および微分の3つの要素によって, 入力値の制御を行う方法である.
+% \section{PID制御}
+% PID制御（Proportional-Integral-Differential Controller）は, 制御工学におけるフィードバック制御の一種である.
+% 出力値と目標値との偏差, その積分, および微分の3つの要素によって, 入力値の制御を行う方法である.
 
-\subsection{P制御}
-基本的なフィードバック制御として比例制御（P制御）がある.
-これは操作量を制御量と目標値の偏差の一次関数として制御するものである.
-PID制御では, この偏差に比例して操作量を変化させる動作を比例動作, またはP動作といい, その時の定数は比例ゲイン, Pゲインと呼ばれる.
+% \subsection{P制御}
+% 基本的なフィードバック制御として比例制御（P制御）がある.
+% これは操作量を制御量と目標値の偏差の一次関数として制御するものである.
+% PID制御では, この偏差に比例して操作量を変化させる動作を比例動作, またはP動作といい, その時の定数は比例ゲイン, Pゲインと呼ばれる.
 
-\subsection{I制御}
-P制御において, 周囲の環境が変わるたびに残留偏差をなくすように比例ゲインを決定しなおすことが難しい.
-そこで, 残留偏差が存在する場合, その偏差の時間積分に比例して入力値を変化させる動作をする項を追加する.
-追加した項が持つ役割がI制御である.
-偏差のある状態が長い時間続けばそれだけ入力値の変化を大きくして目標値に近づけようとする役目を果たす.
-ここで, 定数は積分ゲイン, Iゲインと呼ばれる.
+% \subsection{I制御}
+% P制御において, 周囲の環境が変わるたびに残留偏差をなくすように比例ゲインを決定しなおすことが難しい.
+% そこで, 残留偏差が存在する場合, その偏差の時間積分に比例して入力値を変化させる動作をする項を追加する.
+% 追加した項が持つ役割がI制御である.
+% 偏差のある状態が長い時間続けばそれだけ入力値の変化を大きくして目標値に近づけようとする役目を果たす.
+% ここで, 定数は積分ゲイン, Iゲインと呼ばれる.
 
-\subsection{D制御}
-PI制御の問題点として, 周囲の環境が変化したり制御対象に撹乱が加わったりすることで出力値が急に変動することがある.
-この問題を解決するために, 急激な出力値の変化が起こった場合, その変化の大きさに比例した入力を行うことでその変化に抵抗する役割を持つ項を追加する.
-追加した項が持つ役割がD制御である.
-定数は微分ゲイン, Dゲインと呼ばれる.
+% \subsection{D制御}
+% PI制御の問題点として, 周囲の環境が変化したり制御対象に撹乱が加わったりすることで出力値が急に変動することがある.
+% この問題を解決するために, 急激な出力値の変化が起こった場合, その変化の大きさに比例した入力を行うことでその変化に抵抗する役割を持つ項を追加する.
+% 追加した項が持つ役割がD制御である.
+% 定数は微分ゲイン, Dゲインと呼ばれる.
 
 \newpage

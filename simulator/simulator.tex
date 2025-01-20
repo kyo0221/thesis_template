@@ -4,6 +4,8 @@
 AI-Formulaのような人の歩行速度以上で移動するロボットは検証する場所を確保することが容易ではないため, アルゴリズムの初期検証などはシミュレータ環境で検証・改善を行うことが望ましい.
 AI-Formulaでは基本的な機能が実装されたシミュレータ環境が運営から提供されている.
 提供されたシミュレータ環境はモビリティとAIモビリティパーク紫峰の外周コースをシミュレートしたものになっている.
+提供されたシミュレータ環境では基本的な機能が実装されているが, GNSS+IMUセンサ（VectorNav VN-200）の出力を再現できていない.
+そのため, GNSS+IMUセンサ（VectorNav VN-200）の出力を再現する機能を追加して, 提供されたシミュレータを拡張して使用している.\cite{aifomrula-sim-chibakou}
 Fig.5.1に提供されたシミュレータ環境の外観を示す.
 Fig.5.2にシミュレートするモビリティとコースの外観を示す.
 
@@ -24,10 +26,6 @@ Fig.5.2にシミュレートするモビリティとコースの外観を示す.
 \end{figure}
 
 \newpage
-
-% もっと前で議論ってどこ???
-提供されたシミュレータ環境では基本的な機能が実装されているが, GNSS+IMUセンサ（VectorNav VN-200）の出力を再現できていない.
-そのため, GNSS+IMUセンサ（VectorNav VN-200）の出力を再現する機能を追加して, 提供されたシミュレータを拡張して使用している.\cite{aifomrula-sim-chibakou}
 
 シミュレータはROS 2とGazebo上で実装されており, Fig.5.3に示すようなノードの構成になっている.
 
@@ -55,10 +53,10 @@ Table.5.1にシミュレーションする主なセンサとアクチュエー�
   \end{tabular}
 \end{table}
 
-\section{実験の概要}
+\section{実験}
 開発した経路追従ソフトウェアをシミュレータ環境で検証する.
 
-\section{実験環境}
+\subsection{実験環境}
 前述の提供されたシミュレータ環境にGNSS+IMUセンサ（VectorNav VN-200）の出力を追加したシミュレータ環境を使用する.
 ソフトウェアにはROS 2 foxyを使用し, シミュレータ環境にはGazebo Classicを使用している.
 Fig.5.4にシミュレータで扱うコースの全体図を示す.
@@ -74,7 +72,7 @@ Table.5.2にシミュレータに使用するPCの仕様を示す.
 
 \begin{table}[H]
   \centering
-  \caption{experimental device}
+  \caption{Experimental device}
   \begin{tabular}{cclll}
   \cline{1-2}
   Computer             & Let`s note CF-SV &  &  &  \\
@@ -86,7 +84,7 @@ Table.5.2にシミュレータに使用するPCの仕様を示す.
   \end{tabular}
 \end{table}
 
-\section{実験内容}
+\subsection{実験内容}
 Fig5.5の丸で示された位置から矢印に沿うルートでシミュレータ環境のコースを一周させる.
 制御パラメータは以下とし, 目標速度は一定値とする.
 
@@ -102,7 +100,7 @@ Fig5.5の丸で示された位置から矢印に沿うルートでシミュレ�
 
 \begin{figure}[H]
   \centering
- \includegraphics[keepaspectratio, scale=0.55]
+ \includegraphics[keepaspectratio, scale=0.6]
       {images/simulatorpath.png}
  \caption{Simulator course}
  \label{fig:simulator}
@@ -112,7 +110,7 @@ Fig5.5の丸で示された位置から矢印に沿うルートでシミュレ�
 % 作成した経路追従アルゴリズムの追従性を確認する実験を行う.
 % 本実験では前述の通り予め決めたコースを1周させたときの評価項目や走行経路の軌跡から作成した経路追従アルゴリズムの有効性を判断する.
 
-\section{実験結果}
+\subsection{実験結果}
 シミュレータ環境で作成した経路追従ソフトウェアを使用することで実験を行った.
 
 シミュレータで自律走行したときのロボットの軌跡をFig.5.6に示す.

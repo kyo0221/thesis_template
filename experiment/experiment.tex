@@ -7,18 +7,18 @@ Fig.6.1にAIモビリティパーク紫峰を示す.
 検証をするにあたって, いくつかの評価項目を設ける. 
 評価項目をTable.6.1に示す.
 追従誤差は目標経路の全ての経路点とGNSSから得たモビリティの座標データの距離から最小の値を取り出すことで求める.
-求めた追従誤差を積分することで, 追従誤差の累計を求める.
+求めた追従誤差を積分することで, 積分絶対値誤差を求める.
 
 \begin{table}[H]
   \centering
-  \caption{evaluation item}
+  \caption{Evaluation item}
   \begin{tabular}{cclll}
   \cline{1-1}
   評価項目                    &  &  &  &  \\
   \cline{1-2}
   目標速度（並進速度） {[}m/s{]}    &  &  &  &  \\
   ゴールするまでの時間 {[}s{]}            &  &  &  &  \\
-  追従誤差の累計 {[}m{]} &  &  &  &  \\
+  積分絶対値誤差 {[}m·s{]} &  &  &  &  \\
   追従誤差の最大値 {[}m{]}  &  &  &  &  \\
   \multicolumn{1}{l}{}    &  &  &  &  \\
   \multicolumn{1}{l}{}    &  &  &  & 
@@ -52,7 +52,7 @@ Fig.6.1にAIモビリティパーク紫峰を示す.
 
 \begin{table}[H]
      \centering
-     \caption{experimental device}
+     \caption{Experimental device}
      \begin{tabular}{cclll}
      \cline{1-2}
      computer             & Jetson AGX Orin &  &  &  \\
@@ -79,6 +79,19 @@ Fig.6.3に作成した目標経路をGoogle Map上にプロットした図を示
 \end{figure}
 
 \section{実験内容}
+本実験では, 開発した経路追従ソフトウェアの検証をするために, 以下の2つの実験を行う.
+\begin{table}[H]
+     \centering
+     \begin{tabular}{lcl}
+         $実験1$ &  & 低速域での経路追従ソフトウェアの初期検証 \\
+         $実験2$ &  & 高速域での経路追従ソフトウェアの検証 \\
+     \end{tabular}
+\end{table}
+% 実験1 低速域での経路追従ソフトウェアの初期検証
+% 実験2 高速域での経路追従ソフトウェアの検証
+実験1では, 低速域で走行させることにより開発した経路追従ソフトウェアの初期検証を行う.
+実験2では, 高速域で走行させることにより低速域で走行した時との挙動の比較を行う.
+
 Fig.6.4の丸で示された位置から矢印に沿うルートでAIモビリティパーク紫峰の外周を一周させる.
 制御パラメータは以下とし, 目標速度は一定とする.
 
@@ -101,15 +114,12 @@ Fig.6.4の丸で示された位置から矢印に沿うルートでAIモビリ�
      \end{tabular}
 \end{table}
 
-\newpage
-
-\section{実験結果と考察}
-
-\subsection{実験1}
+\subsection{実験1  低速域での経路追従ソフトウェアの初期検証}
+開発した経路追従ソフトウェアの初期検証を行うために, 目標速度3.0[m/s]で実験を行う.
 走行時のパラメータをTable.6.3に示す.
 \begin{table}[H]
      \centering
-     \caption{experiment1 parameters}
+     \caption{Experiment1 parameters}
      \begin{tabular}{cclll}
      \multicolumn{1}{c|}{linear\_vel}     & 3.0  &  &  &  \\
      \multicolumn{1}{c|}{interval\_ms}    & 50   &  &  &  \\
@@ -121,16 +131,39 @@ Fig.6.4の丸で示された位置から矢印に沿うルートでAIモビリ�
      \end{tabular}
 \end{table}
 
-実験の結果, 目標並進速度3m/sで経路から外れること無くコースを一周することができた.
+\subsection{実験2  高速域での経路追従ソフトウェアの検証}
+目標速度6.0[m/s]で実験を行う.
+走行時のパラメータをTable.6.4に示す.
+
+\begin{table}[H]
+     \centering
+     \caption{Experiment1 parameters}
+     \begin{tabular}{cclll}
+     \multicolumn{1}{c|}{linear\_vel}     & 6.0  &  &  &  \\
+     \multicolumn{1}{c|}{interval\_ms}    & 50   &  &  &  \\
+     \multicolumn{1}{c|}{p\_gain}          & 1.0  &  &  &  \\
+     \multicolumn{1}{c|}{i\_gain}          & 0.0  &  &  &  \\
+     \multicolumn{1}{c|}{d\_gain}          & 0.15 &  &  &  \\
+     \multicolumn{1}{l}{}                 &      &  &  &  \\
+     \multicolumn{1}{l}{}                 &      &  &  & 
+     \end{tabular}
+\end{table}
+
+\newpage
+
+\section{実験結果}
+
+\subsection{実験1   低速域での経路追従ソフトウェアの初期検証}
+実験の結果, 目標並進速度3[m/s]で経路から外れること無くコースを一周することができた.
 実験時の走行経路と目標経路の軌跡をFig.6.5に示す.
 走行経路は走行時のGNSSデータを基準に求めている.
 また, 目標経路との誤差の遷移をFig.6.6に示す.
-最後に評価項目の結果をTable.6.4に示す.
+最後に評価項目の結果をTable.6.5に示す.
 
 \begin{figure}[H]
      \centering
-    \includegraphics[keepaspectratio, scale=0.7]
-         {images/3mspath.png}
+    \includegraphics[keepaspectratio, scale=0.55]
+         {images/3msIAE.png}
     \caption{Trajectory of travel route and target route}
     \label{fig:path}
 \end{figure}
@@ -145,10 +178,10 @@ Fig.6.4の丸で示された位置から矢印に沿うルートでAIモビリ�
 
 \begin{table}[H]
      \centering
-     \caption{evaluation item}
+     \caption{Evaluation item}
      \begin{tabular}{cclll}
      \multicolumn{1}{c|}{ゴールするまでの時間{[}s{]}}           & 153   &  &  &  \\
-     \multicolumn{1}{c|}{追従誤差の累計{[}m{]}} & 2244.0 &  &  &  \\
+     \multicolumn{1}{c|}{積分絶対値誤差{[}m·s{]}} & 116.53 &  &  &  \\
      \multicolumn{1}{c|}{追従誤差の最大値{[}m{]}} & 2.8 &  &  &  \\
                                                 &      &  &  &  \\
                                                 &      &  &  &  \\
@@ -157,24 +190,8 @@ Fig.6.4の丸で示された位置から矢印に沿うルートでAIモビリ�
      \end{tabular}
 \end{table}
 
-\subsection{実験2}
-走行時のパラメータをTable.6.5に示す.
-
-\begin{table}[H]
-     \centering
-     \caption{experiment1 parameters}
-     \begin{tabular}{cclll}
-     \multicolumn{1}{c|}{linear\_vel}     & 6.0  &  &  &  \\
-     \multicolumn{1}{c|}{interval\_ms}    & 50   &  &  &  \\
-     \multicolumn{1}{c|}{p\_gain}          & 1.0  &  &  &  \\
-     \multicolumn{1}{c|}{i\_gain}          & 0.0  &  &  &  \\
-     \multicolumn{1}{c|}{d\_gain}          & 0.15 &  &  &  \\
-     \multicolumn{1}{l}{}                 &      &  &  &  \\
-     \multicolumn{1}{l}{}                 &      &  &  & 
-     \end{tabular}
-\end{table}
-
-実験の結果, 目標並進速度6m/sで経路から外れること無くコースを一周することができた.
+\subsection{実験2   高速域での経路追従ソフトウェアの検証}
+実験の結果, 目標並進速度6[m/s]で経路から外れること無くコースを一周することができた.
 コースの初めのカーブ後の道で蛇行する動きを見せたものの, 経路から外れることなく周回することができた.
 実験時の走行経路と目標経路の軌跡をFig.6.7に示す.
 また, 目標経路との誤差の遷移をFig.6.8に示す.
@@ -182,8 +199,8 @@ Fig.6.4の丸で示された位置から矢印に沿うルートでAIモビリ�
 
 \begin{figure}[H]
      \centering
-    \includegraphics[keepaspectratio, scale=0.7]
-         {images/6mspath2.png}
+    \includegraphics[keepaspectratio, scale=0.55]
+         {images/6msIAE.png}
     \caption{Trajectory of travel route and target route}
     \label{fig:path}
 \end{figure}
@@ -198,10 +215,10 @@ Fig.6.4の丸で示された位置から矢印に沿うルートでAIモビリ�
 
 \begin{table}[H]
      \centering
-     \caption{evaluation item}
+     \caption{Evaluation item}
      \begin{tabular}{cclll}
      \multicolumn{1}{c|}{ゴールするまでの時間{[}s{]}}           & 51   &  &  &  \\
-     \multicolumn{1}{c|}{追従誤差の累計{[}m{]}} & 1130.0 &  &  &  \\
+     \multicolumn{1}{c|}{積分絶対値誤差{[}m·s{]}} & 56.43 &  &  &  \\
      \multicolumn{1}{c|}{追従誤差の最大値{[}m{]}} & 2.11 &  &  &  \\
                                                 &      &  &  &  \\
                                                 &      &  &  &  \\
@@ -209,3 +226,7 @@ Fig.6.4の丸で示された位置から矢印に沿うルートでAIモビリ�
      \multicolumn{1}{l}{}                       &      &  &  & 
      \end{tabular}
 \end{table}
+
+開発した経路追従ソフトウェアを実環境で検証した.
+検証の結果, 開発した経路追従ソフトウェアは目標経路を適切に追従し, 高速域においても経路から逸脱することなく走行可能であることが確認された.
+低速域と高速域における追従誤差を比較すると, 高速域では一部蛇行挙動が見られたが, 大きな逸脱は発生しなかった.
